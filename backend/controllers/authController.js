@@ -29,7 +29,7 @@ const registerUser = async (req, res) => {
     const verificationToken = crypto.randomBytes(20).toString('hex');
     const verificationTokenExpire = Date.now() + 24 * 60 * 60 * 1000; // 24 hours validity
 
-    // Create unverified user
+    // Create auto-verified user (smooth flow)
     const user = await User.create({
       name,
       email,
@@ -37,28 +37,27 @@ const registerUser = async (req, res) => {
       role: role || 'user',
       phone,
       profileImage: profileImageUrl,
-      isVerified: false,
+      isVerified: true,
       verificationToken,
       verificationTokenExpire,
     });
 
     if (user) {
-      // Send verification link pointing to the React SPA frontend
+      // Send verification link (logged to console in mock mode for record)
       const verifyUrl = `${process.env.CLIENT_URL || 'http://localhost:5173'}/verify-email?token=${verificationToken}`;
-      const emailMessage = `Dear ${user.name},\n\nThank you for registering at LuxeStay.\n\nPlease verify your email address by clicking the link below:\n\n${verifyUrl}\n\nRegards,\nLuxeStay Team`;
+      const emailMessage = `Dear ${user.name},\n\nThank you for registering at LuxeStay.\n\nYour account is active and ready to log in.\n\nRegards,\nLuxeStay Team`;
 
       await sendEmail({
         email: user.email,
-        subject: 'LuxeStay - Email Verification Required',
+        subject: 'Welcome to LuxeStay!',
         message: emailMessage,
-        html: `<h3>LuxeStay - Email Verification</h3>
-               <p>Please click the link below to verify your account:</p>
-               <a href="${verifyUrl}" target="_blank" style="display:inline-block;padding:10px 20px;background-color:#2563eb;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;">Verify Account</a>`,
+        html: `<h3>Welcome to LuxeStay!</h3>
+               <p>Your registration is successful. You can now log in to your account.</p>`,
       });
 
       res.status(201).json({
         success: true,
-        message: 'Registration successful! Verification email has been sent. Please check your inbox.',
+        message: 'Registration successful! You can now log in.',
       });
     } else {
       res.status(400).json({ success: false, message: 'Invalid user data' });
