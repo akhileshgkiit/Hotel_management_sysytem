@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { useAuth } from '../context/AuthContext';
 import { ShieldCheck, ShieldAlert, Save, Image as ImageIcon } from 'lucide-react';
+import UserAvatar from '../components/UserAvatar';
+
 
 const Profile = () => {
   const { user, updateProfile } = useAuth();
@@ -86,7 +88,7 @@ const Profile = () => {
           {/* Avatar Upload */}
           <div className="flex items-center space-x-6">
             <div className="relative h-20 w-20 rounded-full overflow-hidden border border-slate-200 dark:border-slate-750 shadow-inner">
-              <img src={imagePreview} alt={name} className="h-full w-full object-cover" />
+              <UserAvatar user={{ name, profileImage: imagePreview }} className="h-full w-full text-2xl" />
             </div>
             <div className="space-y-1">
               <label className="text-xs font-semibold text-slate-500 block">PROFILE PICTURE</label>

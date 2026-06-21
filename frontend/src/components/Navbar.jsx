@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { Sun, Moon, Menu, X, Hotel, User, LogOut, LayoutDashboard } from 'lucide-react';
+import UserAvatar from './UserAvatar';
+
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -67,11 +69,7 @@ const Navbar = () => {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="flex items-center space-x-2 focus:outline-none"
                 >
-                  <img
-                    className="h-9 w-9 rounded-full object-cover border border-slate-300 dark:border-slate-700"
-                    src={user.profileImage}
-                    alt={user.name}
-                  />
+                  <UserAvatar user={user} className="h-9 w-9 text-sm" />
                   <span className="text-slate-700 dark:text-slate-200 font-medium hidden lg:inline">{user.name}</span>
                 </button>
 
@@ -179,11 +177,7 @@ const Navbar = () => {
           {isAuthenticated ? (
             <div className="pt-4 pb-2 border-t border-slate-200 dark:border-slate-800">
               <div className="flex items-center px-3 mb-3">
-                <img
-                  className="h-10 w-10 rounded-full object-cover mr-3"
-                  src={user.profileImage}
-                  alt={user.name}
-                />
+                <UserAvatar user={user} className="h-10 w-10 text-base mr-3" />
                 <div>
                   <div className="text-base font-medium text-slate-800 dark:text-slate-200">{user.name}</div>
                   <div className="text-sm font-medium text-slate-500 dark:text-slate-400 capitalize">{user.role}</div>

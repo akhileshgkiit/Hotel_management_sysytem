@@ -11,6 +11,8 @@ import {
   LogOut,
   ArrowLeftRight
 } from 'lucide-react';
+import UserAvatar from './UserAvatar';
+
 
 const Sidebar = () => {
   const { user, logout } = useAuth();
@@ -48,11 +50,7 @@ const Sidebar = () => {
       <div className="py-6 px-4 space-y-6">
         {/* User Mini Profile */}
         <div className="flex items-center space-x-3 pb-6 border-b border-slate-200 dark:border-slate-800">
-          <img
-            src={user?.profileImage}
-            alt={user?.name}
-            className="h-10 w-10 rounded-full object-cover border border-slate-300 dark:border-slate-700"
-          />
+          <UserAvatar user={user} className="h-10 w-10 text-base" />
           <div className="overflow-hidden">
             <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">{user?.name}</h4>
             <p className="text-xs text-slate-500 capitalize">{user?.role} Portal</p>

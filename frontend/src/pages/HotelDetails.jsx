@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import { api, useAuth } from '../context/AuthContext';
 import { Star, MapPin, Calendar, Bed, Users, ShieldAlert, CheckCircle2, MessageSquare, Send, Wallet, XSquare } from 'lucide-react';
+import UserAvatar from '../components/UserAvatar';
+
 
 const HotelDetails = () => {
   const { id } = useParams();
@@ -470,11 +472,7 @@ const HotelDetails = () => {
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <img
-                          src={rev.userId?.profileImage}
-                          alt={rev.userId?.name}
-                          className="h-10 w-10 rounded-full object-cover border border-slate-200"
-                        />
+                        <UserAvatar user={rev.userId} className="h-10 w-10 text-base" />
                         <div>
                           <h4 className="font-semibold text-slate-850">{rev.userId?.name}</h4>
                           <span className="text-xs text-slate-400">

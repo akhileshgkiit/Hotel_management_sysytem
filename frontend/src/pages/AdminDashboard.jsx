@@ -12,6 +12,8 @@ import {
   UserCheck,
   BookOpen
 } from 'lucide-react';
+import UserAvatar from '../components/UserAvatar';
+
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('analytics');
@@ -287,7 +289,7 @@ const AdminDashboard = () => {
                 {users.map((u) => (
                   <tr key={u._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
                     <td className="px-6 py-4 font-bold flex items-center space-x-3">
-                      <img src={u.profileImage} alt="" className="h-7 w-7 rounded-full object-cover" />
+                      <UserAvatar user={u} className="h-7 w-7 text-xs" />
                       <span>{u.name}</span>
                     </td>
                     <td className="px-6 py-4">{u.email}</td>
