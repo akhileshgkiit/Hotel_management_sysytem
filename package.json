@@ -11,7 +11,7 @@
     "build-frontend": "npm run build --prefix frontend",
     "start-backend": "npm start --prefix backend",
     "build": "npm run install-backend",
-    "start": "npm run start-backend",
+    "start": "npm run seed-db && npm run start-backend",
     "seed-db": "npm run seed --prefix backend"
   },
   "author": "",
