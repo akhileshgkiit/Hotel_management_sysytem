@@ -55,6 +55,54 @@ const users = [
     isVerified: true,
   },
   {
+    name: 'Agra Admin',
+    email: 'agra_admin@luxestay.com',
+    password: 'password123',
+    role: 'hotelAdmin',
+    phone: '9876543216',
+    isVerified: true,
+  },
+  {
+    name: 'Udaipur Admin',
+    email: 'udaipur_admin@luxestay.com',
+    password: 'password123',
+    role: 'hotelAdmin',
+    phone: '9876543217',
+    isVerified: true,
+  },
+  {
+    name: 'Shimla Admin',
+    email: 'shimla_admin@luxestay.com',
+    password: 'password123',
+    role: 'hotelAdmin',
+    phone: '9876543218',
+    isVerified: true,
+  },
+  {
+    name: 'Kabini Admin',
+    email: 'kabini_admin@luxestay.com',
+    password: 'password123',
+    role: 'hotelAdmin',
+    phone: '9876543219',
+    isVerified: true,
+  },
+  {
+    name: 'Gulmarg Admin',
+    email: 'gulmarg_admin@luxestay.com',
+    password: 'password123',
+    role: 'hotelAdmin',
+    phone: '9876543220',
+    isVerified: true,
+  },
+  {
+    name: 'Kerala Admin',
+    email: 'kerala_admin@luxestay.com',
+    password: 'password123',
+    role: 'hotelAdmin',
+    phone: '9876543221',
+    isVerified: true,
+  },
+  {
     name: 'Regular Customer',
     email: 'user@luxestay.com',
     password: 'password123',
@@ -119,6 +167,90 @@ const hotelsData = [
       'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'
     ],
     amenities: ['Wi-Fi', 'Pool', 'Spa', 'Restaurant', 'Bar', 'Room Service', 'Executive Lounge', 'Fitness Center'],
+    status: 'approved',
+  },
+  {
+    adminEmail: 'agra_admin@luxestay.com',
+    hotelName: 'The Oberoi Amarvilas',
+    description: 'Located just 600 meters from the Taj Mahal, all rooms, suites, lobbies, and lounges offer uninterrupted views of this monument to love. Styled with elements inspired by Mughal architecture.',
+    address: 'Taj East Gate Road',
+    city: 'Agra',
+    state: 'Uttar Pradesh',
+    images: [
+      'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80'
+    ],
+    amenities: ['Wi-Fi', 'Pool', 'Spa', 'Restaurant', 'Bar', 'Room Service', 'Fitness Center', 'Valet Parking'],
+    status: 'approved',
+  },
+  {
+    adminEmail: 'udaipur_admin@luxestay.com',
+    hotelName: 'Taj Lake Palace',
+    description: 'A stunning white marble palace rising from the waters of Lake Pichola. This heritage luxury hotel offers an ethereal experience, complete with royal boat transfers, butler service, and historical walks.',
+    address: 'Lake Pichola',
+    city: 'Udaipur',
+    state: 'Rajasthan',
+    images: [
+      'https://images.unsplash.com/photo-1598977123418-45f04b01f1bb?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
+    ],
+    amenities: ['Wi-Fi', 'Pool', 'Spa', 'Restaurant', 'Bar', 'Room Service', 'Butler Service', 'Lake View'],
+    status: 'approved',
+  },
+  {
+    adminEmail: 'shimla_admin@luxestay.com',
+    hotelName: 'Wildflower Hall, An Oberoi Resort',
+    description: 'Situated 8,250 feet above sea level in the Himalayas, Wildflower Hall offers a sanctuary of luxury. Features an outdoor heated whirlpool with mountain views, pine forest trails, and open-air dining.',
+    address: 'Chharabra, Shimla-Kufri Highway',
+    city: 'Shimla',
+    state: 'Himachal Pradesh',
+    images: [
+      'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
+    ],
+    amenities: ['Wi-Fi', 'Pool', 'Spa', 'Restaurant', 'Bar', 'Room Service', 'Fitness Center', 'Indoor Pool'],
+    status: 'approved',
+  },
+  {
+    adminEmail: 'kabini_admin@luxestay.com',
+    hotelName: 'Evolve Back Kabini',
+    description: 'Bordered on two sides by the Kabini River, this resort is designed to reflect the local Kuruba culture. Offers luxurious safari lodges, private plunge pools, and wildlife safaris.',
+    address: 'Bheeramballi, H.D. Kote Taluk',
+    city: 'Kabini',
+    state: 'Karnataka',
+    images: [
+      'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80'
+    ],
+    amenities: ['Wi-Fi', 'Pool', 'Spa', 'Restaurant', 'Bar', 'Room Service', 'Safari', 'River View'],
+    status: 'approved',
+  },
+  {
+    adminEmail: 'gulmarg_admin@luxestay.com',
+    hotelName: 'The Khyber Himalayan Resort & Spa',
+    description: 'A world-class resort in the heart of the Pir Panjal range. Situated close to the Gulmarg Gondola, it offers easy ski access, heated indoor pools, and breathtaking views of snow-capped peaks.',
+    address: 'Near Gondola, Gulmarg',
+    city: 'Gulmarg',
+    state: 'Jammu and Kashmir',
+    images: [
+      'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=800&q=80'
+    ],
+    amenities: ['Wi-Fi', 'Pool', 'Spa', 'Restaurant', 'Bar', 'Room Service', 'Ski Access', 'Indoor Pool'],
+    status: 'approved',
+  },
+  {
+    adminEmail: 'kerala_admin@luxestay.com',
+    hotelName: 'Kumarakom Lake Resort',
+    description: 'Set on the banks of Lake Vembanad, this heritage resort features traditional 16th-century manors (Illums) restored to absolute luxury. Features a winding swimming pool, houseboats, and Ayurvedic wellness.',
+    address: 'Kumarakom, Kottayam',
+    city: 'Kumarakom',
+    state: 'Kerala',
+    images: [
+      'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80'
+    ],
+    amenities: ['Wi-Fi', 'Pool', 'Spa', 'Restaurant', 'Bar', 'Room Service', 'Lake Access', 'Ayurveda'],
     status: 'approved',
   },
 ];
