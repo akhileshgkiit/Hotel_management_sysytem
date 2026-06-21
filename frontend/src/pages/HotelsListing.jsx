@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import { api, useAuth } from '../context/AuthContext';
-import { Star, MapPin, Heart, Wifi, Car, Flame, ShieldAlert, Award } from 'lucide-react';
+import { Star, MapPin, Heart, Wifi, Car, Flame, ShieldAlert, Award, Building } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HotelsListing = () => {
@@ -216,7 +216,7 @@ const HotelsListing = () => {
 
                       {/* Amenities Icons Preview */}
                       <div className="flex gap-2">
-                        {hotel.amenities.slice(0, 3).map((a) => (
+                        {(hotel.amenities || []).slice(0, 3).map((a) => (
                           <span
                             key={a}
                             className="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300"
@@ -224,9 +224,9 @@ const HotelsListing = () => {
                             {a}
                           </span>
                         ))}
-                        {hotel.amenities.length > 3 && (
+                        {(hotel.amenities || []).length > 3 && (
                           <span className="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded text-slate-600 dark:text-slate-300">
-                            +{hotel.amenities.length - 3} more
+                            +{(hotel.amenities || []).length - 3} more
                           </span>
                         )}
                       </div>
