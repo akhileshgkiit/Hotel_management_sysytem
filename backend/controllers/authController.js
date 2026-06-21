@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
 
     if (user) {
       // Send verification link pointing to the React SPA frontend
-      const verifyUrl = `http://localhost:5173/verify-email?token=${verificationToken}`;
+      const verifyUrl = `${process.env.CLIENT_URL || 'http://localhost:5173'}/verify-email?token=${verificationToken}`;
       const emailMessage = `Dear ${user.name},\n\nThank you for registering at LuxeStay.\n\nPlease verify your email address by clicking the link below:\n\n${verifyUrl}\n\nRegards,\nLuxeStay Team`;
 
       await sendEmail({
