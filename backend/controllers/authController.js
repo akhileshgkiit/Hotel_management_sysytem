@@ -57,7 +57,15 @@ const registerUser = async (req, res) => {
 
       res.status(201).json({
         success: true,
-        message: 'Registration successful! You can now log in.',
+        message: 'Registration successful!',
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        phone: user.phone,
+        profileImage: user.profileImage || 'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg',
+        wishlist: user.wishlist,
+        token: generateToken(user._id),
       });
     } else {
       res.status(400).json({ success: false, message: 'Invalid user data' });

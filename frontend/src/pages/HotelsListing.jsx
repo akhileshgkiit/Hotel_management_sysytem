@@ -51,6 +51,11 @@ const HotelsListing = () => {
     fetchHotels();
   }, [city, priceMin, priceMax, rating, selectedAmenities]);
 
+  // Sync city state when URL search parameters change (e.g. from Home page or Navbar)
+  useEffect(() => {
+    setCity(initialCity);
+  }, [initialCity]);
+
   const handleAmenityChange = (amenity) => {
     setSelectedAmenities((prev) =>
       prev.includes(amenity) ? prev.filter((a) => a !== amenity) : [...prev, amenity]
