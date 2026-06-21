@@ -1,0 +1,21 @@
+const express = require('express');
+const router = express.Router();
+const {
+  registerUser,
+  loginUser,
+  getMe,
+  verifyEmail,
+  googleLogin,
+} = require('../controllers/authController');
+const { protect } = require('../middleware/authMiddleware');
+const upload = require('../middleware/uploadMiddleware');
+
+router.post('/register', upload.single('profileImage'), registerUser);
+router.post('/login', loginUser);
+router.get('/me', protect, getMe);
+
+// Verification and Google OAuth routes
+router.get('/verify/:token', verifyEmail);
+router.post('/google', googleLogin);
+
+module.exports = router;
