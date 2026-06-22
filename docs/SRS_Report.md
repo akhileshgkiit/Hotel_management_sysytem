@@ -1,118 +1,272 @@
-# Software Requirements Specification (SRS) & Research Report
-**Project Name:** LuxeStay Hotel Booking System  
-**Version:** 1.0.0  
-**Date:** June 21, 2026  
+# LUXESTAY HOTEL BOOKING SYSTEM
+## Software Requirements Specification (SRS) – Research Report
+
+**Submitted By:**  
+Akhilesh Kumar Gupta  
+
+**Technology Stack:**  
+* MongoDB  
+* Express.js  
+* React.js  
+* Node.js  
+
+**Submitted To:**  
+Rupa Khadka  
+Nagarik Solution Pvt. Ltd.  
 
 ---
 
-## 1. Introduction
+## CERTIFICATE
 
-### 1.1 Purpose
-This document serves as the Software Requirements Specification (SRS) and Research Report for the LuxeStay Hotel Booking System. It details the system's architecture, design constraints, functional and non-functional requirements, data models, and user role permissions.
+This is to certify that the project entitled **"LuxeStay Hotel Booking System"** submitted by **Akhilesh Kumar Gupta** is a record of work carried out during the internship period under proper guidance and supervision.
 
-### 1.2 Scope
-LuxeStay is a full-featured MERN (MongoDB, Express.js, React, Node.js) stack web application designed to facilitate seamless accommodation searches, room booking, payment processing, and property administration. The platform supports three primary user roles: Regular Customers, Hotel Admins, and Super Admins.
-
-### 1.3 Key Definitions
-* **JWT (JSON Web Token):** A secure method for representing claims between two parties, used for stateless authentication.
-* **MERN Stack:** MongoDB (Database), Express.js (Backend Framework), React (Frontend Framework), Node.js (Runtime Environment).
-* **Role-Based Access Control (RBAC):** Restricting system access based on the role assigned to a specific user account.
+**Trainer Signature:** \_\_\_\_\_\_\_\_\_\_  
+**Date:** \_\_\_\_\_\_\_\_\_\_  
 
 ---
 
-## 2. System Architecture & Tech Stack
+## DECLARATION
 
-```mermaid
-graph TD
-    Client[React Frontend / Vite] -->|HTTPS Requests| Backend[Express.js / Node.js Server]
-    Backend -->|Mongoose ODM| DB[(MongoDB Atlas / Railway DB)]
-    Backend -->|File Uploads| Cloudinary(Cloudinary CDN)
-    Backend -->|Mock Payments| Gateways(eSewa, Khalti, Razorpay APIs)
-    Backend -->|SMTP/Console| Mailer(Nodemailer)
-```
+I hereby declare that this report entitled **"LuxeStay Hotel Booking System"** is my original work and has not been submitted elsewhere for any academic or professional purpose.
 
-### 2.1 Frontend Architecture
-* **Core:** React 18, Vite.
-* **Styling:** Tailwind CSS (for modern UI cards, dark/light themes, and glassmorphism layouts).
-* **Routing:** React Router DOM (supports public routes, protected user routes, and protected admin portals).
-* **API Communication:** Axios (configured with intercepts to attach JWT bearer authorization header).
-* **Icons:** Lucide-React.
-
-### 2.2 Backend Architecture
-* **Runtime:** Node.js, Express.js.
-* **Security Middleware:** Helmet (HTTP headers protection), CORS (Cross-Origin Resource Sharing restrictions).
-* **File Upload Handling:** Multer + Cloudinary SDK.
-* **Authentication:** Bcrypt.js (password hashing) + Jsonwebtoken (stateless tokens).
+**Akhilesh Kumar Gupta**  
 
 ---
 
-## 3. Data Models (Database Schema)
+## ACKNOWLEDGEMENT
 
-### 3.1 User Schema
-Stores credential and profile information for all users.
-```javascript
-{
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true, select: false },
-  role: { type: String, enum: ['user', 'hotelAdmin', 'admin'], default: 'user' },
-  phone: { type: String, required: true },
-  profileImage: { type: String, default: 'sample.jpg' },
-  isBlocked: { type: Boolean, default: false },
-  isVerified: { type: Boolean, default: false },
-  wishlist: [{ type: Schema.Types.ObjectId, ref: 'Hotel' }]
-}
-```
-
-### 3.2 Hotel Schema
-Contains property details and relates each property to a dedicated `hotelAdmin`.
-```javascript
-{
-  hotelAdmin: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  hotelName: { type: String, required: true },
-  description: { type: String, required: true },
-  address: { type: String, required: true },
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  images: { type: [String], default: [] },
-  amenities: { type: [String], default: [] },
-  rating: { type: Number, default: 0 },
-  status: { type: String, enum: ['pending', 'approved', 'rejected', 'blocked'], default: 'pending' }
-}
-```
-
-### 3.3 Room Schema
-Defines rooms belonging to a specific hotel.
-```javascript
-{
-  hotelId: { type: Schema.Types.ObjectId, ref: 'Hotel', required: true },
-  roomType: { type: String, required: true },
-  description: { type: String, required: true },
-  price: { type: Number, required: true },
-  capacity: { type: Number, required: true },
-  images: { type: [String], default: [] },
-  availableRooms: { type: Number, required: true }
-}
-```
+I would like to express my sincere gratitude to my trainer, mentors, and Nagarik Solution Pvt. Ltd. for their continuous support and guidance throughout the development of the LuxeStay Hotel Booking System. Their valuable suggestions and encouragement helped me successfully complete this project.
 
 ---
 
-## 4. Role-Based Permissions Matrix
+## ABSTRACT
 
-| Feature / Action | Regular User | Hotel Admin | Super Admin |
-| :--- | :---: | :---: | :---: |
-| Browse & Search Hotels | Yes | Yes | Yes |
-| Write Reviews / Ratings | Yes | No | No |
-| Book Rooms & Checkout | Yes | No | No |
-| Manage Profile & Wishlist | Yes | Yes | Yes |
-| Edit Property Information | No | Yes (Own Hotel) | Yes (Any Hotel) |
-| Manage Room Inventory | No | Yes (Own Hotel) | No |
-| Approve/Block Hotels | No | No | Yes |
-| Block/Unblock Users | No | No | Yes |
+LuxeStay Hotel Booking System is a web-based platform developed to simplify hotel reservation and management processes. The system allows users to search hotels, view room details, make bookings, manage reservations, and submit reviews. Hotel administrators manage hotel information and room inventory, while Super Administrators oversee platform activities.
+
+The project is developed using the MERN stack (MongoDB, Express.js, React.js, and Node.js) along with JWT authentication, Cloudinary integration, and role-based access control. The platform provides a secure, efficient, and user-friendly solution for hotel booking and management.
 
 ---
 
-## 5. Non-Functional Requirements
-1. **Performance:** Pages must load in under 2 seconds. Images should render optimized versions using Unsplash / Cloudinary transform rules.
-2. **Security:** Passwords must be hashed using bcrypt (10 rounds). API routes must be protected using JWT verification.
-3. **Availability:** The platform must be deployed in a high-availability server environment (Railway + Vercel) with an automated crash recovery restart policy.
+## TABLE OF CONTENTS
+
+1. [Introduction](#chapter-1-introduction)
+2. [Overall Description](#chapter-2-overall-description)
+3. [System Requirements](#chapter-3-system-requirements)
+4. [System Design](#chapter-4-system-design)
+5. [Database Design](#chapter-5-database-design)
+6. [Technology Stack & Implementation](#chapter-6-technology-stack--implementation)
+7. [Testing & Results](#chapter-7-testing--results)
+8. [Future Enhancements](#chapter-8-future-enhancements)
+9. [Conclusion](#chapter-9-conclusion)
+
+---
+
+## CHAPTER 1: INTRODUCTION
+
+### 1.1 Background
+The hospitality industry has increasingly adopted digital technologies to improve customer experience and operational efficiency. Online hotel booking systems allow customers to search hotels, compare prices, and make reservations conveniently.
+
+LuxeStay was developed to provide a centralized platform for hotel booking and management.
+
+### 1.2 Purpose
+The purpose of LuxeStay is to simplify hotel reservation processes and provide management tools for hotels through a secure web-based platform.
+
+### 1.3 Objectives
+* **Primary Objective**: Develop a hotel booking platform that allows users to search and reserve rooms online.
+* **Secondary Objectives**:
+  * User authentication
+  * Hotel management
+  * Room management
+  * Booking management
+  * Review management
+  * Administrative control
+
+### 1.4 Scope
+The system supports hotel listings, room reservations, reviews, booking management, and administrative operations.
+
+---
+
+## CHAPTER 2: OVERALL DESCRIPTION
+
+### 2.1 Product Perspective
+LuxeStay is a MERN-stack application following a client-server architecture.
+
+### 2.2 Product Functions
+* **User Functions**:
+  * Registration
+  * Login
+  * Search Hotels
+  * Book Rooms
+  * Wishlist Management
+  * Submit Reviews
+* **Hotel Admin Functions**:
+  * Manage Hotels
+  * Manage Rooms
+  * View Reservations
+* **Super Admin Functions**:
+  * Approve Hotels
+  * Manage Users
+  * View Analytics
+
+### 2.3 User Classes
+* Regular User
+* Hotel Administrator
+* Super Administrator
+
+---
+
+## CHAPTER 3: SYSTEM REQUIREMENTS
+
+### Functional Requirements
+
+#### User Module
+* User Registration
+* User Login
+* Profile Management
+
+#### Hotel Module
+* Create Hotel
+* Update Hotel
+* Hotel Approval
+
+#### Room Module
+* Add Room
+* Update Room
+* Delete Room
+
+#### Booking Module
+* Search Hotels
+* View Hotel Details
+* Book Rooms
+* Cancel Bookings
+
+#### Review Module
+* Submit Review
+* View Reviews
+
+#### Wishlist Module
+* Add to Wishlist
+* Remove from Wishlist
+
+### Non-Functional Requirements
+
+#### Security
+* JWT Authentication
+* bcrypt Password Encryption
+* RBAC (Role-Based Access Control)
+
+#### Performance
+* Fast API Response
+* Optimized Queries
+
+#### Scalability
+* Support Growing Users and Hotels
+
+---
+
+## CHAPTER 4: SYSTEM DESIGN
+
+### Architecture
+The system follows a three-tier architecture:
+* **Presentation Layer**: React.js, Tailwind CSS
+* **Application Layer**: Node.js, Express.js
+* **Data Layer**: MongoDB
+
+### Authentication Flow
+User → Login → JWT Token → Protected Routes
+
+### Cloudinary Integration
+Cloudinary is used for hotel and room image storage.
+
+---
+
+## CHAPTER 5: DATABASE DESIGN
+
+### User Collection
+* name
+* email
+* password
+* role
+* phone
+
+### Hotel Collection
+* hotelName
+* address
+* city
+* amenities
+* rating
+
+### Room Collection
+* roomType
+* price
+* capacity
+* availability
+
+### Booking Collection
+* userId
+* roomId
+* bookingStatus
+* totalAmount
+
+### Review Collection
+* rating
+* comment
+
+### Relationships
+* User → Booking
+* Hotel → Room
+* Hotel → Review
+* Room → Booking
+
+---
+
+## CHAPTER 6: TECHNOLOGY STACK & IMPLEMENTATION
+
+### Frontend
+* React.js
+* Vite
+* Tailwind CSS
+* Axios
+
+### Backend
+* Node.js
+* Express.js
+* JWT
+* bcrypt
+* Nodemailer
+
+### Database
+* MongoDB
+* Mongoose
+
+### Cloud Services
+* Cloudinary
+
+---
+
+## CHAPTER 7: TESTING & RESULTS
+
+| Test Case | Expected Result | Status |
+| :--- | :--- | :--- |
+| Registration | Success | Pass |
+| Login | Success | Pass |
+| Hotel Search | Success | Pass |
+| Room Booking | Success | Pass |
+| Review Submission | Success | Pass |
+
+### Results
+The system successfully performed authentication, booking management, review handling, and hotel administration functions.
+
+---
+
+## CHAPTER 8: FUTURE ENHANCEMENTS
+* AI-Based Recommendations
+* Dynamic Pricing
+* Mobile Application
+* Loyalty Program
+* Advanced Analytics
+
+---
+
+## CHAPTER 9: CONCLUSION
+LuxeStay Hotel Booking System successfully provides a secure and efficient platform for hotel booking and management. The system improves customer convenience while helping hotels manage reservations and operations effectively. The use of MERN technologies ensures scalability, maintainability, and future expansion opportunities.
